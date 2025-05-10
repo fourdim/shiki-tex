@@ -1,0 +1,35 @@
+{
+  "name": "shiki-tex",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "build": "unbuild",
+    "dev": "pnpm build && node ./bin.mjs"
+  },
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "shiki-tex": "bin.mjs"
+  },
+  "files": [
+    "bin.mjs",
+    "dist"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "dependencies": {
+    "@types/hast": "^3.0.4",
+    "@types/node": "^22.15.17",
+    "cac": "^6.7.14",
+    "shiki": "^3.4.0",
+    "unbuild": "^3.5.0"
+  }
+}
