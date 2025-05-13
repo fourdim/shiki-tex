@@ -1,3 +1,6 @@
+// Ported from https://github.com/toeverything/blocksuite
+// MPL 2.0 License
+
 import type { Root, RootContentMap } from 'hast';
 
 export type HastUnionType<
@@ -11,9 +14,17 @@ export type HtmlAST =
 
 type Keyof<T> = T extends unknown ? keyof T : never;
 
+export class ASTWalkerContext {
+  resultLaTeX: string = '';
+
+  preparedBuffer: string = '';
+
+  fontColor = '000000';
+}
+
 type WalkerFn<ONode extends object> = (
   o: NodeProps<ONode>,
-  context: Map<string, string>,
+  context: ASTWalkerContext,
 ) => Promise<void> | void;
 
 export type NodeProps<Node extends object> = {
@@ -24,9 +35,10 @@ export type NodeProps<Node extends object> = {
   index: number | null;
 };
 
+
 // Ported from https://github.com/Rich-Harris/estree-walker MIT License
 export class ASTWalker<ONode extends object> {
-  private _context: Map<string, string> = new Map();
+  private _context: ASTWalkerContext = new ASTWalkerContext();
 
   private _enter: WalkerFn<ONode> | undefined;
 
