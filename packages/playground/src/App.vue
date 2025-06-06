@@ -23,6 +23,9 @@ const error = ref('')
 const runConvert = async () => {
   error.value = ''
   try {
+    if (escapeInside.value.split(',').length !== 2) {
+      throw new Error('Escape Inside must be in the format "start,end"')
+    }
     const [resultLaTex, colorCache] = await codeToLaTeX(input.value, {
       lang: lang.value,
       theme: theme.value,
