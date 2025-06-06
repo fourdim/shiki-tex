@@ -13,9 +13,22 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "shiki",
+    "syntax",
+    "highlight",
+    "highlighting",
+    "tex",
+    "latex"
+  ],
+  "author": "fourdim",
   "license": "MPL-2.0",
+  "homepage": "https://github.com/fourdim/shiki-tex#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fourdim/shiki-tex.git",
+    "directory": "packages/core"
+  },
   "packageManager": "pnpm@10.10.0",
   "dependencies": {
     "@types/hast": "^3.0.4",
@@ -23,5 +36,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.17"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

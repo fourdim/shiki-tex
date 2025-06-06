@@ -82,8 +82,8 @@ const colorExtract = (str: string) => {
 export const codeToLaTeX = async (
   content: string,
   options: {
-    lang: BundledLanguage,
-    theme: BundledTheme,
+    lang: BundledLanguage | string,
+    theme: BundledTheme | string,
     escapeInside: EscapeInsidePair,
   }
 ): Promise<[string, Map<string, string>]> => {
@@ -108,6 +108,7 @@ export const codeToLaTeX = async (
         const styles = style.split(';');
         const pendingStyleList: string[] = [];
         pendingStyleList.push(`\\lstset{`);
+        pendingStyleList.push(`  escapeinside={${escapeLeft}}{${escapeRight}},\n  columns=fullflexible,`);
         for (const s of styles) {
           const [key, value] = s.split(':');
           const color = colorExtract(value.trim());

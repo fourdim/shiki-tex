@@ -14,6 +14,8 @@ describe('escape test', () => {
 
     const expected = `
 \\lstset{
+  escapeinside={<@}{@>},
+  columns=fullflexible,
   basicstyle=\\footnotesize\\ttfamily\\color{24292E},
 }
 \\begin{lstlisting}
@@ -35,6 +37,8 @@ describe('escape test', () => {
 
     const expected = `
 \\lstset{
+  escapeinside={<@}{@>},
+  columns=fullflexible,
   basicstyle=\\footnotesize\\ttfamily\\color{24292E},
 }
 \\begin{lstlisting}
