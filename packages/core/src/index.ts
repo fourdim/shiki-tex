@@ -1,8 +1,7 @@
 import { BundledLanguage, BundledTheme, codeToHast } from 'shiki';
 import { ASTWalker, HtmlAST } from './adapter';
-import fs from 'node:fs/promises'
-import { parse } from 'node:path'
-import cac from 'cac';
+
+export type EscapeInsidePair = [string, string];
 
 const RealSpacePlaceholder = '||114space514||';
 
@@ -85,12 +84,15 @@ export const codeToLaTeX = async (
   options: {
     lang: BundledLanguage,
     theme: BundledTheme,
-  },
+    escapeInside: EscapeInsidePair,
+  }
 ): Promise<[string, Map<string, string>]> => {
   const ast = await codeToHast(content, {
     lang: options.lang,
     theme: options.theme,
   });
+
+  const [escapeLeft, escapeRight] = options.escapeInside;
 
   const colorCache = new Map<string, string>();
 
@@ -143,7 +145,7 @@ export const codeToLaTeX = async (
 
   walker.setLeave((o, context) => {
     if (o.node.type === 'element' && o.node.tagName === 'code') {
-      context.resultLaTeX += '\n\\end{lstlisting}\n';
+      context.resultLaTeX += '\n\\end{lstlisting}';
     }
     if (o.node.type === 'element' && o.node.tagName === 'span') {
       if (o.node.properties.style) {
@@ -153,13 +155,13 @@ export const codeToLaTeX = async (
           let [trimmed, before, after] = getTrimmed(context.preparedBuffer);
           context.resultLaTeX += before;
           if (color in colorCache) {
-            context.resultLaTeX += `<@\\textcolor{${color}}{${escape(trimmed)}}@>`;
+            context.resultLaTeX += `${escapeLeft}\\textcolor{${color}}{${escape(trimmed)}}${escapeRight}`;
           } if (color === context.fontColor) {
             context.resultLaTeX += trimmed;
           } else {
             const colorDef = defineColor(color);
             colorCache.set(color, colorDef);
-            context.resultLaTeX += `<@\\textcolor{${color}}{${escape(trimmed)}}@>`;
+            context.resultLaTeX += `${escapeLeft}\\textcolor{${color}}{${escape(trimmed)}}${escapeRight}`;
           }
           context.resultLaTeX += after;
         }
@@ -170,47 +172,3 @@ export const codeToLaTeX = async (
   const context = await walker.walk(ast);
   return [context.resultLaTeX, colorCache];
 }
-
-export const run = async (
-  argv = process.argv,
-  output = console.log,
-) => {
-  const cli = cac('shiki-tex');
-
-  cli
-    .option('--theme <theme>', 'Color theme to use', { default: 'light-plus' })
-    .option('--lang <lang>', 'Programming language')
-    .help();
-
-  const { options, args } = cli.parse(argv);
-  const files = args;
-
-  const colorStore = new Map<string, string>();
-
-  const codes = await Promise.all(files.map(async (path) => {
-    const content = await fs.readFile(path, 'utf-8');
-    const ext = options.lang || parse(path).ext.slice(1);
-
-    return await codeToLaTeX(content, {
-      lang: ext,
-      theme: options.theme,
-    }).then(([LaTeX, colorCache]) => {
-      for (const [color, colorDef] of colorCache.entries()) {
-        if (!colorStore.has(color)) {
-          colorStore.set(color, colorDef);
-        }
-      }
-      return LaTeX;
-    })
-  }));
-
-  for (const [_, colorDef] of colorStore.entries()) {
-    output(colorDef);
-  }
-  output();
-  for (const code of codes) {
-    output(code);
-  }
-}
-
-run();

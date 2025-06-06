@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "main": "dist/index.js",
+  "bin": {
+    "shiki-tex": "bin.mjs"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "unbuild",
+    "build:native": "bun build ./bin.mjs --compile --minify --outfile shiki-tex",
+    "dev": "unbuild --stub",
+    "start": "node bin.mjs"
+  },
+  "dependencies": {
+    "shiki-tex": "workspace:*",
+    "cac": "^6.7.14"
+  }
+}
