@@ -23,12 +23,12 @@ const error = ref('')
 const runConvert = async () => {
   error.value = ''
   try {
-    const [latex, colorCache] = await codeToLaTeX(input.value, {
+    const [resultLaTex, colorCache] = await codeToLaTeX(input.value, {
       lang: lang.value,
       theme: theme.value,
       escapeInside: escapeInside.value.split(',') as [string, string],
     })
-    output.value = latex
+    output.value = resultLaTex
     preview.value = await codeToHtml(input.value, {
       lang: lang.value,
       theme: theme.value,

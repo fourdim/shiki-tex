@@ -1,6 +1,6 @@
 {
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "bin": {
     "shiki-tex": "bin.mjs"
   },

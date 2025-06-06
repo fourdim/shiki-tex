@@ -3,7 +3,10 @@
   "type": "module",
   "packageManager": "pnpm@10.11.0",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build:core": "pnpm -C packages/core build",
+    "build:cli": "pnpm build:core && pnpm -C packages/cli build",
+    "build:playground": "pnpm build:core && pnpm -C packages/playground build"
   },
   "devDependencies": {
     "shiki-tex": "workspace:*",

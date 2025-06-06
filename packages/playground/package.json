@@ -14,6 +14,7 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "shiki-tex": "workspace:*",
     "@iconify-json/mdi": "^1.2.3",
     "@tsconfig/node22": "^22.0.1",
     "@types/node": "^22.14.0",
