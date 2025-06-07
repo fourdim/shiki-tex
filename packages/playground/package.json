@@ -22,7 +22,7 @@
     "@vitejs/plugin-vue": "^5.2.3",
     "@vitejs/plugin-vue-jsx": "^4.1.2",
     "@vue/tsconfig": "^0.7.0",
-    "npm-run-all2": "^7.0.2",
+    "npm-run-all2": "^8.0.0",
     "shiki": "^3.4.0",
     "typescript": "~5.8.0",
     "unocss": "^66.1.3",
