@@ -3,5 +3,8 @@
   "extends": [
     "config:recommended"
   ],
+  "schedule": [
+    "* * * * 0,6"
+  ],
   "lockFileMaintenance": { "enabled": true, "extends": ["schedule:weekly"] }
 }
