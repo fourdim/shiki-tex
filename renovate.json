@@ -3,8 +3,23 @@
   "extends": [
     "config:recommended"
   ],
-  "schedule": [
-    "* * * * 0,6"
+  "packageRules": [
+    {
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "matchPackageNames": [
+        "*"
+      ]
+    }
   ],
-  "lockFileMaintenance": { "enabled": true, "extends": ["schedule:weekly"] }
+  "lockFileMaintenance": {
+    "enabled": true,
+    "extends": [
+      "schedule:monthly"
+    ]
+  }
 }
