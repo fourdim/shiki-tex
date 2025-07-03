@@ -11,7 +11,7 @@ The [Playground](https://shiki-tex.vercel.app/) offers the simplest way to gener
 1. Paste your code into the editor
 2. Select your preferred language and theme
 3. Copy the generated LaTeX code
-4. Paste it into your LaTeX document
+4. Paste it back into your LaTeX document
 
 The syntax highlighting will be automatically applied when you compile your LaTeX document.
 
@@ -37,7 +37,7 @@ const [content, colorDefs] = await codeToLaTeX(code, {
   escapeInside: ['<@', '@>'],
 });
 
-console.log(Array.from(colorDef.values()).join('\n'));
+console.log(Array.from(colorDefs.values()).join('\n'));
 console.log(content);
 ```
 

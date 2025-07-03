@@ -76,11 +76,11 @@ export const compileLaTeX = async (laTeX: string) => {
 
 export const expectCompile = async (
   content: string,
-  colorDef: Map<string, string>,
+  colorDefs: Map<string, string>,
 ) => {
   await compileLaTeX(
     laTeXTemplate({
-      colorDefs: Array.from(colorDef.values()).join('\n'),
+      colorDefs: Array.from(colorDefs.values()).join('\n'),
       content,
     }),
   )
