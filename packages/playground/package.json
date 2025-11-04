@@ -17,7 +17,7 @@
     "shiki-tex": "workspace:*",
     "@iconify-json/mdi": "^1.2.3",
     "@tsconfig/node22": "^22.0.1",
-    "@types/node": "^22.14.0",
+    "@types/node": "^24.0.0",
     "@unocss/preset-icons": "^66.1.3",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vitejs/plugin-vue-jsx": "^5.0.0",
