@@ -1,15 +1,10 @@
 // Ported from https://github.com/toeverything/blocksuite
 // MPL 2.0 License
 
-import type { Root, RootContentMap } from 'hast';
-
-export type HastUnionType<
-  K extends keyof RootContentMap,
-  V extends RootContentMap[K],
-> = V;
+import type { Root, RootContent } from 'hast';
 
 export type HtmlAST =
-  | HastUnionType<keyof RootContentMap, RootContentMap[keyof RootContentMap]>
+  | RootContent
   | Root;
 
 type Keyof<T> = T extends unknown ? keyof T : never;

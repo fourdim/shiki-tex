@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { exec, execSync } from 'node:child_process';
 import { writeFileSync, mkdtempSync, rmSync } from 'node:fs';
 import os from 'node:os';
@@ -36,7 +35,7 @@ ${"content"}
 `
 
 export const mkTempFolder = () => {
-  return mkdtempSync(path.join(os.tmpdir(), "shiki-text-"));
+  return mkdtempSync(path.join(os.tmpdir(), "shiki-tex-"));
 }
 
 
